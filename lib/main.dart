@@ -19,9 +19,12 @@ class DedoApp extends StatelessWidget {
         scaffoldBackgroundColor: AppColors.background,
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
-            backgroundColor: AppColors.accent,
+            backgroundColor: AppColors.primary,
             foregroundColor: Colors.white,
             padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 24.0),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(4.0), // Reduced radius
+            ),
           ),
         ),
         textTheme: const TextTheme(

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import '../../Common/Config/Theme/app_colors.dart';
+import '../../Core/Widgets/custom_textfield.dart';
 
 class SupplierInfo {
   final TextEditingController invoiceNo = TextEditingController();
@@ -51,19 +52,41 @@ class _ClaimFormPageState extends State<ClaimFormPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Claim Submission'),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            DropdownButtonFormField<String>(
-              decoration: InputDecoration(
-                labelText: 'Organization*',
-                labelStyle: const TextStyle(color: AppColors.textSecondary),
-                suffix: const Text(
+            const Row(
+              children: [
+                Text(
+                  'Organization',
+                  style: TextStyle(color: AppColors.textSecondary),
+                ),
+                Text(
                   '*',
                   style: TextStyle(color: AppColors.error),
+                ),
+              ],
+            ),
+            const SizedBox(height: 8.0),
+            DropdownButtonFormField<String>(
+              decoration: const InputDecoration(
+                labelText: 'Organization',
+                labelStyle: TextStyle(color: AppColors.textSecondary),
+                suffix: Text(
+                  '*',
+                  style: TextStyle(color: AppColors.error),
+                ),
+                border: OutlineInputBorder(),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: AppColors.textSecondary),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: AppColors.primary),
                 ),
               ),
               value: selectedOrganization,
@@ -77,48 +100,28 @@ class _ClaimFormPageState extends State<ClaimFormPage> {
               },
             ),
             const SizedBox(height: 16.0),
-            TextField(
+            CustomTextField(
+              labelText: 'Name of Applicant',
               controller: applicantNameController,
-              decoration: InputDecoration(
-                labelText: 'Name of Applicant*',
-                labelStyle: const TextStyle(color: AppColors.textSecondary),
-                suffix: const Text(
-                  '*',
-                  style: TextStyle(color: AppColors.error),
-                ),
-              ),
+              isRequired: true,
             ),
             const SizedBox(height: 16.0),
-            TextField(
+            CustomTextField(
+              labelText: 'Designation',
               controller: designationController,
-              decoration: InputDecoration(
-                labelText: 'Designation*',
-                labelStyle: const TextStyle(color: AppColors.textSecondary),
-                suffix: const Text(
-                  '*',
-                  style: TextStyle(color: AppColors.error),
-                ),
-              ),
+              isRequired: true,
             ),
             const SizedBox(height: 16.0),
-            TextField(
+            CustomTextField(
+              labelText: 'BIN No. (If Any)',
               controller: binController,
-              decoration: const InputDecoration(
-                labelText: 'BIN No. (If Any)',
-                labelStyle: TextStyle(color: AppColors.textSecondary),
-              ),
+              isRequired: false,
             ),
             const SizedBox(height: 16.0),
-            TextField(
+            CustomTextField(
+              labelText: 'Actual Amount of VAT',
               controller: vatAmountController,
-              decoration: InputDecoration(
-                labelText: 'Actual Amount of VAT*',
-                labelStyle: const TextStyle(color: AppColors.textSecondary),
-                suffix: const Text(
-                  '*',
-                  style: TextStyle(color: AppColors.error),
-                ),
-              ),
+              isRequired: true,
               keyboardType: TextInputType.number,
             ),
             const SizedBox(height: 24.0),
@@ -147,79 +150,43 @@ class _ClaimFormPageState extends State<ClaimFormPage> {
                     padding: const EdgeInsets.all(16.0),
                     child: Column(
                       children: [
-                        TextField(
+                        CustomTextField(
+                          labelText: 'Invoice/Chalan No.',
                           controller: supplier.invoiceNo,
-                          decoration: InputDecoration(
-                            labelText: 'Invoice/Chalan No.*',
-                            labelStyle: const TextStyle(color: AppColors.textSecondary),
-                            suffix: const Text(
-                              '*',
-                              style: TextStyle(color: AppColors.error),
-                            ),
-                          ),
+                          isRequired: true,
                         ),
                         const SizedBox(height: 16.0),
-                        TextField(
+                        CustomTextField(
+                          labelText: 'Invoice/Chalan Date',
                           controller: supplier.date,
-                          decoration: InputDecoration(
-                            labelText: 'Invoice/Chalan Date*',
-                            labelStyle: const TextStyle(color: AppColors.textSecondary),
-                            suffix: const Text(
-                              '*',
-                              style: TextStyle(color: AppColors.error),
-                            ),
-                          ),
+                          isRequired: true,
                           readOnly: true,
                           onTap: () => _selectDate(context, supplier.date),
                         ),
                         const SizedBox(height: 16.0),
-                        TextField(
+                        CustomTextField(
+                          labelText: 'Supplier',
                           controller: supplier.supplier,
-                          decoration: InputDecoration(
-                            labelText: 'Supplier*',
-                            labelStyle: const TextStyle(color: AppColors.textSecondary),
-                            suffix: const Text(
-                              '*',
-                              style: TextStyle(color: AppColors.error),
-                            ),
-                          ),
+                          isRequired: true,
                         ),
                         const SizedBox(height: 16.0),
-                        TextField(
+                        CustomTextField(
+                          labelText: 'Supplier BIN',
                           controller: supplier.supplierBin,
-                          decoration: InputDecoration(
-                            labelText: 'Supplier BIN*',
-                            labelStyle: const TextStyle(color: AppColors.textSecondary),
-                            suffix: const Text(
-                              '*',
-                              style: TextStyle(color: AppColors.error),
-                            ),
-                          ),
+                          isRequired: true,
                         ),
                         const SizedBox(height: 16.0),
-                        TextField(
+                        CustomTextField(
+                          labelText: 'Amount of Supplies',
                           controller: supplier.amountSupplies,
-                          decoration: InputDecoration(
-                            labelText: 'Amount of Supplies*',
-                            labelStyle: const TextStyle(color: AppColors.textSecondary),
-                            suffix: const Text(
-                              '*',
-                              style: TextStyle(color: AppColors.error),
-                            ),
-                          ),
+                          isRequired: true,
                           keyboardType: TextInputType.number,
                         ),
                         const SizedBox(height: 16.0),
-                        TextField(
+                        CustomTextField(
+                          labelText: 'Amount of VAT/TAX',
                           controller: supplier.amountVat,
-                          decoration: InputDecoration(
-                            labelText: 'Amount of VAT/TAX*',
-                            labelStyle: const TextStyle(color: AppColors.textSecondary),
-                            suffix: const Text(
-                              '*',
-                              style: TextStyle(color: AppColors.error),
-                            ),
-                          ),
+                          isRequired: true,
                           keyboardType: TextInputType.number,
                         ),
                         const SizedBox(height: 16.0),

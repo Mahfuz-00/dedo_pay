@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
+import '../../Common/Config/Assets/app_images.dart';
 import '../../Common/Config/Theme/app_colors.dart';
 import '../../Core/Navigation/app_router.dart';
+import '../../Core/Widgets/custom_textfield.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -9,32 +11,31 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Center(
+      body: Center(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(16.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              TextField(
-                decoration: InputDecoration(
-                  labelText: 'Email*',
-                  labelStyle: const TextStyle(color: AppColors.textSecondary),
-                  suffix: const Text(
-                    '*',
-                    style: TextStyle(color: AppColors.error),
-                  ),
-                ),
+              Image.asset(
+                AppImages.loginLogo,
+                height: 100,
+                width: 100,
+                // errorBuilder: (context, error, stackTrace) => const Icon(
+                //   Icons.image,
+                //   size: 100,
+                //   color: AppColors.textSecondary,
+                // ),
+              ),
+              const SizedBox(height: 24.0),
+              const CustomTextField(
+                labelText: 'Email',
+                isRequired: true,
               ),
               const SizedBox(height: 16.0),
-              TextField(
-                decoration: InputDecoration(
-                  labelText: 'Password*',
-                  labelStyle: const TextStyle(color: AppColors.textSecondary),
-                  suffix: const Text(
-                    '*',
-                    style: TextStyle(color: AppColors.error),
-                  ),
-                ),
+              const CustomTextField(
+                labelText: 'Password',
+                isRequired: true,
                 obscureText: true,
               ),
               const SizedBox(height: 16.0),
